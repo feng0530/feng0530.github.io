@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Authors of Hugo on Feng&#39;s Website</title>
+    <title>Authors of Hugo on Frank&#39;s Website</title>
     <link>https://feng0530.github.io/authors/hugo-authors/</link>
-    <description>Recent content in Authors of Hugo on Feng&#39;s Website</description>
+    <description>Recent content in Authors of Hugo on Frank&#39;s Website</description>
     <generator>Hugo</generator>
-    <language>en</language>
+    <language>zh-tw</language>
     <lastBuildDate></lastBuildDate>
     <atom:link href="https://feng0530.github.io/authors/hugo-authors/index.xml" rel="self" type="application/rss+xml" />
   </channel>

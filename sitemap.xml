@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://feng0530.github.io/tags/css/</loc>
-    <lastmod>2025-03-11T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://feng0530.github.io/</loc>
+    <lastmod>2025-03-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://feng0530.github.io/about/</loc>
+    <lastmod>2025-03-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://feng0530.github.io/tags/css/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://feng0530.github.io/authors/frank-qiu/</loc>
@@ -30,6 +33,9 @@
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://feng0530.github.io/categories/syntax/</loc>
+    <lastmod>2025-03-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://feng0530.github.io/tags/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://feng0530.github.io/categories/theme-demo/</loc>
@@ -94,15 +100,6 @@
   </url><url>
     <loc>https://feng0530.github.io/categoria/sintaxe/</loc>
     <lastmod>2023-01-04T23:21:06+01:00</lastmod>
-  </url><url>
-    <loc>https://feng0530.github.io/tags/shortcodes/_index.pt-br/</loc>
-    <lastmod>2023-01-04T11:51:36+01:00</lastmod>
-  </url><url>
-    <loc>https://feng0530.github.io/tags/</loc>
-    <lastmod>2023-01-04T11:51:36+01:00</lastmod>
-  </url><url>
-    <loc>https://feng0530.github.io/about/</loc>
-    <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://feng0530.github.io/contact/</loc>
   </url><url>
