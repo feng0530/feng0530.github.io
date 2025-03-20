@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://feng0530.github.io/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2025-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2025-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/tags/hugo/</loc>
+    <loc>http://localhost:1313/tags/hugo/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/tags/markdown/</loc>
+    <loc>http://localhost:1313/tags/markdown/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/posts/markdown-notes/</loc>
+    <loc>http://localhost:1313/posts/markdown-notes/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/categories/%E8%87%AA%E6%88%91%E5%AD%B8%E7%BF%92/</loc>
+    <loc>http://localhost:1313/categories/%E8%87%AA%E6%88%91%E5%AD%B8%E7%BF%92/</loc>
     <lastmod>2025-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/tags/java/</loc>
+    <loc>http://localhost:1313/tags/java/</loc>
     <lastmod>2024-12-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/tags/line-notify/</loc>
+    <loc>http://localhost:1313/tags/line-notify/</loc>
     <lastmod>2024-12-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/tags/spring-boot/</loc>
+    <loc>http://localhost:1313/tags/spring-boot/</loc>
     <lastmod>2024-12-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/posts/line-notify/</loc>
+    <loc>http://localhost:1313/posts/line-notify/</loc>
     <lastmod>2024-12-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://feng0530.github.io/projects/</loc>
+    <loc>http://localhost:1313/projects/</loc>
   </url><url>
-    <loc>https://feng0530.github.io/projects/project1/</loc>
+    <loc>http://localhost:1313/projects/project1/</loc>
   </url><url>
-    <loc>https://feng0530.github.io/projects/project2/</loc>
+    <loc>http://localhost:1313/projects/project2/</loc>
   </url>
 </urlset>
