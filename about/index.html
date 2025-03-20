@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
-
-<head>
+  <link rel="stylesheet" href="https://kucw.io/plugins/themify-icons/themify-icons.css ">
+<hWead>
   <title>
-  關於我 · Frank&#39;s Website
+  關於我
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +12,20 @@
 
 
 
-<meta name="author" content="Frank Qiu">
-<meta name="description" content="關於 Frank Qiu，一位從緯育TibaMe培訓班完成轉職的 Java工程師">
-<meta name="keywords" content="blog,developer,personal">
+<meta name="author" content="Frank Chiu">
+<meta name="description" content="關於 Frank Chiu，一位從緯育TibaMe培訓班完成轉職的 Java工程師">
+<meta name="keywords" content="Frank Chiu,java,website">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="關於我">
-  <meta name="twitter:description" content="關於 Frank Qiu，一位從緯育TibaMe培訓班完成轉職的 Java工程師">
+  <meta name="twitter:description" content="關於 Frank Chiu，一位從緯育TibaMe培訓班完成轉職的 Java工程師">
 
 <meta property="og:url" content="https://feng0530.github.io/about/">
   <meta property="og:site_name" content="Frank&#39;s Website">
   <meta property="og:title" content="關於我">
-  <meta property="og:description" content="關於 Frank Qiu，一位從緯育TibaMe培訓班完成轉職的 Java工程師">
+  <meta property="og:description" content="關於 Frank Chiu，一位從緯育TibaMe培訓班完成轉職的 Java工程師">
   <meta property="og:locale" content="zh_tw">
   <meta property="og:type" content="article">
     <meta property="article:published_time" content="2025-03-12T00:00:00+00:00">
@@ -44,7 +44,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css" integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm&#43;MTzNJdv80k&#43;n0=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="/css/coder.min.172f16f46a56460165420470fe3c288abc6c6f087d8f506a63b0faa14f157e20.css" integrity="sha256-Fy8W9GpWRgFlQgRw/jwoirxsbwh9j1BqY7D6oU8VfiA=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -54,7 +54,7 @@
   
     
     
-    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+    <link rel="stylesheet" href="/css/coder-dark.min.5da730f27b77109b00a3b11bbb3f0ec63768469872ec2e9e7c692c1378eb0572.css" integrity="sha256-Xacw8nt3EJsAo7Ebuz8OxjdoRphy7C6efGksE3jrBXI=" crossorigin="anonymous" media="screen" />
   
 
 
@@ -93,7 +93,7 @@
   gtag('config', 'G-M5LN30FZCD');
 </script>
 
-</head>
+</hWead>
 
 
 
@@ -102,21 +102,16 @@
 
 <body class="preload-transitions colorscheme-auto">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
   <section class="container">
     
-    <a style="letter-spacing: 0.1rem;" href="https://feng0530.github.io/">
+    <a style="letter-spacing: 0.1rem; font-size: 3rem;" href="https://feng0530.github.io/">
       Frank&#39;s Website
     </a>
     
+
     
       <input type="checkbox" id="menu-toggle" />
       <label class="menu-button float-right" for="menu-toggle">
@@ -125,24 +120,50 @@
       <ul class="navigation-list">
         
           
-            <li class="navigation-item">
-              <a class="navigation-link " href="/about/">關於我</a>
-            </li>
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/about/">關於我</a>
+              </li>
+            
           
-            <li class="navigation-item">
-              <a class="navigation-link " href="/posts/">文章</a>
-            </li>
+            
+              <li class="navigation-item has-dropdown">
+                <a id="posts" class="navigation-link " href="javascript:void(0)">文章</a>
+                <ul class="dropdown">
+                  
+                    <li>
+                      <a class="dropdown-link" href="/posts/">文章列表</a>
+                    </li>
+                  
+                    <li>
+                      <a class="dropdown-link" href="/categories/">文章分類</a>
+                    </li>
+                  
+                    <li>
+                      <a class="dropdown-link" href="/tags/">文章標籤</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
           
-            <li class="navigation-item">
-              <a class="navigation-link " href="/projects/">專案</a>
-            </li>
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/projects/">專案</a>
+              </li>
+            
           
         
-        
+
+        <li class="navigation-item">
+          <button id="openModalBtn" class="algolia-search-btn navigation-link">搜尋網站 <i class="ti-search"></i></button>
+        </li>
       </ul>
     
   </section>
 </nav>
+
+
 
     <div class="content">
       
@@ -155,8 +176,126 @@
         </a>
       </h1>
     </header>
+    <h4 class="widget-title">過往經歷</h4>
+<ul class="timeline">
+    
+    <li>
+        <div class="direction-r">
+            <div class="flag-wrapper">
+                <span class="hexa"></span>
+                <span class="time-wrapper"><span class="time">2023/12 ~ Now</span></span>
+            </div>
+            <div class="tl-content">
+                <div class="mt-3">
+                    <span class="flag">程式分析師 (Java)</span>
+                </div>
+                <div class="desc">
+                    <div>鼎盛資科股份有限公司 (精誠集團)</div>
+                    <div>工作內容:
+                        <ul>
+                            <li>xxx</li>
+                            <li>yyy</li>
+                            <li>yyy</li>
+                            <li>yyy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 
-    <p>大家好！我是 Frank Qiu，一位熱衷於 Java 開發的工程師，擁有多年在後端開發和系統設計方面的經驗。很高興能在這個網站上與你分享我的技術之旅和一些心得。</p>
+    
+    <li>
+        <div class="direction-l">
+            <div class="flag-wrapper">
+                <span class="hexa"></span>
+                <span class="time-wrapper"><span class="time">2023/12 ~ Now</span></span>
+            </div>
+            <div class="tl-content">
+                <div class="mt-3">
+                    <span class="flag">程式分析師 (Java)</span>
+                </div>
+                <div class="desc">
+                    <div>鼎盛資科股份有限公司 (精誠集團)</div>
+                    <div>工作內容:
+                        <ul>
+                            <li>xxx</li>
+                            <li>yyy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+    
+    <li>
+        <div class="direction-r">
+            <div class="flag-wrapper">
+                <span class="hexa"></span>
+                <span class="time-wrapper"><span class="time">2023/12 ~ Now</span></span>
+            </div>
+            <div class="tl-content">
+                <div class="mt-3">
+                    <span class="flag">程式分析師 (Java)</span>
+                </div>
+                <div class="desc">
+                    <div>鼎盛資科股份有限公司 (精誠集團)</div>
+                    <div>工作內容:
+                        <ul>
+                            <li>xxx</li>
+                            <li>yyy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<h4 class="widget-title">Skills</h4>
+<div class="skill-wrapper">
+    <div class="skillbar">
+        <div class="skillbar-title">Java</div>
+        <div class="skill-bar-percent">高階</div>
+        <div class="skillbar-bar" style="width: 85%"></div>
+    </div>
+
+    <div class="skillbar">
+        <div class="skillbar-title">Spring Boot、Spring Serurity</div>
+        <div class="skill-bar-percent">高階</div>
+        <div class="skillbar-bar" style="width: 80%"></div>
+    </div>
+
+    <div class="skillbar" data-percent="70%">
+        <div class="skillbar-title">Spring Data JPA、MyBatis</div>
+        <div class="skill-bar-percent">高階</div>
+        <div class="skillbar-bar" style="width: 80%"></div>
+    </div>
+
+    <div class="skillbar">
+        <div class="skillbar-title">Docker</div>
+        <div class="skill-bar-percent">中階</div>
+        <div class="skillbar-bar" style="width: 70%"></div>
+    </div>
+    <div class="skillbar">
+        <div class="skillbar-title">Git、Swagger、Flyway</div>
+        <div class="skill-bar-percent">中階</div>
+        <div class="skillbar-bar" style="width: 60%"></div>
+    </div>
+    <div class="skillbar">
+        <div class="skillbar-title">Rabbit MQ、JasperReports</div>
+        <div class="skill-bar-percent">初階</div>
+        <div class="skillbar-bar" style="width: 40%"></div>
+    </div>
+    <div class="skillbar">
+        <div class="skillbar-title">JUnit、JMeter</div>
+        <div class="skill-bar-percent">基礎</div>
+        <div class="skillbar-bar" style="width: 25%"></div>
+    </div>
+    
+</div>
+    <p>大家好！我是 Frank Chiu，一位熱衷於 Java 開發的工程師，擁有多年在後端開發和系統設計方面的經驗。很高興能在這個網站上與你分享我的技術之旅和一些心得。</p>
 <h2 id="我的背景">
   我的背景
   <a class="heading-link" href="#%e6%88%91%e7%9a%84%e8%83%8c%e6%99%af">
@@ -199,9 +338,9 @@
 </h2>
 <p>如果你對 Java 開發有任何問題，或想討論技術細節，歡迎隨時聯繫我！</p>
 <ul>
-<li>電子郵件：frank.qiu@example.com</li>
+<li>電子郵件：frankchiu0530@google.com</li>
 <li>GitHub：<a href="https://github.com/feng0530/"  class="external-link" target="_blank" rel="noopener">@feng0530</a></li>
-<li>LinkedIn：<a href="https://www.linkedin.com/in/johndoe/"  class="external-link" target="_blank" rel="noopener">Frank Qiu</a></li>
+<li>LinkedIn：<a href="https://www.linkedin.com/in/johndoe/"  class="external-link" target="_blank" rel="noopener">Frank Chiu</a></li>
 </ul>
 <blockquote>
 <p><strong>座右銘</strong>：寫代碼不僅是工作，更是藝術與邏輯的結合。</p></blockquote>
@@ -221,7 +360,7 @@
       2024 -
     
     2025
-     Frank Qiu 
+     Frank Chiu 
     ·
     
     Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
@@ -235,35 +374,28 @@
 
   
   
-  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  <script src="/js/coder.min.ad1b51a43d57149ba412419049a9b61ccce25d9ea1ce369cff7c21dd9128ba75.js" integrity="sha256-rRtRpD1XFJukEkGQSam2HMziXZ6hzjac/3wh3ZEounU="></script>
+  
+
+  
+  
+  
+  <script src="/js/algolia.min.c500d4702823855b453c1d9625155bd918afbb3006d1173cbeaa91471b60775d.js" integrity="sha256-xQDUcCgjhVtFPB2WJRVb2RivuzAG0Rc8vqqRRxtgd10="></script>
+  
+  
+  
+  
+  <script src="/js/algoliasearch-lite.umd.min.f10ac93dcd77e656b79d18e741b90145488aad107b73e98547f92fb609e31036.js" integrity="sha256-8QrJPc135la3nRjnQbkBRUiKrRB7c&#43;mFR/kvtgnjEDY="></script>
+  
+  
+  
+  
+  <script src="/js/instantsearch.production.min.min.92c275fd26dcd04419b53c6aad7cae15dc07d8052d310e93f7eb4cb0e5a76bfe.js" integrity="sha256-ksJ1/Sbc0EQZtTxqrXyuFdwH2AUtMQ6T9&#43;tMsOWna/4="></script>
+  
   
 
   
 
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -276,5 +408,41 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+    
+  <div id="searchModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModalBtn" class="close-btn">&times;</span>
+      <h2>搜尋網站</h2>
+      
+      <div id="searchbox"></div>
+      
+      <div id="hits"></div>
+      
+      <div id="pagination"></div>
+    </div>
+  </div>
 </body>
 </html>

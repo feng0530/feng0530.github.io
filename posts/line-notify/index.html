@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <link rel="stylesheet" href="https://kucw.io/plugins/themify-icons/themify-icons.css ">
+<hWead>
+  <title>
+  Spring Boot 串接 Line Notify
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Frank Chiu">
+<meta name="description" content="Spring Boot 串接 Line Notify的實作練習">
+<meta name="keywords" content="Frank Chiu,java,website">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Spring Boot 串接 Line Notify">
+  <meta name="twitter:description" content="Spring Boot 串接 Line Notify的實作練習">
+
+<meta property="og:url" content="https://feng0530.github.io/posts/line-notify/">
+  <meta property="og:site_name" content="Frank&#39;s Website">
+  <meta property="og:title" content="Spring Boot 串接 Line Notify">
+  <meta property="og:description" content="Spring Boot 串接 Line Notify的實作練習">
+  <meta property="og:locale" content="zh_tw">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-06T00:00:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Spring Boot">
+    <meta property="article:tag" content="Line Notify">
+
+
+
+
+<link rel="canonical" href="https://feng0530.github.io/posts/line-notify/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.172f16f46a56460165420470fe3c288abc6c6f087d8f506a63b0faa14f157e20.css" integrity="sha256-Fy8W9GpWRgFlQgRw/jwoirxsbwh9j1BqY7D6oU8VfiA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.5da730f27b77109b00a3b11bbb3f0ec63768469872ec2e9e7c692c1378eb0572.css" integrity="sha256-Xacw8nt3EJsAo7Ebuz8OxjdoRphy7C6efGksE3jrBXI=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5LN30FZCD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M5LN30FZCD');
+</script>
+
+</hWead>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a style="letter-spacing: 0.1rem; font-size: 3rem;" href="https://feng0530.github.io/">
+      Frank&#39;s Website
+    </a>
+    
+
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/about/">關於我</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item has-dropdown">
+                <a id="posts" class="navigation-link " href="javascript:void(0)">文章</a>
+                <ul class="dropdown">
+                  
+                    <li>
+                      <a class="dropdown-link" href="/posts/">文章列表</a>
+                    </li>
+                  
+                    <li>
+                      <a class="dropdown-link" href="/categories/">文章分類</a>
+                    </li>
+                  
+                    <li>
+                      <a class="dropdown-link" href="/tags/">文章標籤</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/projects/">專案</a>
+              </li>
+            
+          
+        
+
+        <li class="navigation-item">
+          <button id="openModalBtn" class="algolia-search-btn navigation-link">搜尋網站 <i class="ti-search"></i></button>
+        </li>
+      </ul>
+    
+  </section>
+</nav>
+
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://feng0530.github.io/posts/line-notify/">
+              Spring Boot 串接 Line Notify
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-12-06T00:00:00Z">
+                2024-12-06
+              </time>
+            </span>
+            
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E8%87%AA%E6%88%91%E5%AD%B8%E7%BF%92/">自我學習</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/java/">Java</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/spring-boot/">Spring Boot</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/line-notify/">Line Notify</a>
+    </span></div>
+
+        </div>
+      </header>
+      <hr>
+
+      <div class="post-content">
+        
+        <h1 id="1取得-token的兩種方式">
+  1.取得 Token的兩種方式
+  <a class="heading-link" href="#1%e5%8f%96%e5%be%97-token%e7%9a%84%e5%85%a9%e7%a8%ae%e6%96%b9%e5%bc%8f">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h3 id="第一種-個人存取權杖-personal-access-token">
+  第一種: 個人存取權杖 (Personal Access Token)
+  <a class="heading-link" href="#%e7%ac%ac%e4%b8%80%e7%a8%ae-%e5%80%8b%e4%ba%ba%e5%ad%98%e5%8f%96%e6%ac%8a%e6%9d%96-personal-access-token">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>首先登入 <a href="https://notify-bot.line.me/zh_TW/"  class="external-link" target="_blank" rel="noopener">LINE Notify</a> 並進入到個人頁面</p>
+</li>
+<li>
+<p>選擇發行權杖</p>
+<p><img src="/images/line-notify/image.png" alt="image.png"></p>
+</li>
+<li>
+<p>選擇一對一聊天室 or 群組</p>
+<p><img src="/images/line-notify/image1.png" alt="image.png"></p>
+<ul>
+<li>
+<p>沒有發行按鈕可以點選，使用以下語法來觸發按鈕</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 抓取所有 &lt;a&gt; 標籤
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">links</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 篩選出內容為 &#34;發行&#34; 的 &lt;a&gt; 標籤
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">targetLinks</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">links</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">link</span> <span class="p">=&gt;</span> <span class="nx">link</span><span class="p">.</span><span class="nx">textContent</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span> <span class="o">===</span> <span class="s2">&#34;發行&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 觸發每個符合條件的 &lt;a&gt; 標籤的 click 事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">targetLinks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">link</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">link</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span> <span class="c1">// 觸發 click 事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>獲得權杖</p>
+<p><img src="/images/line-notify/image2.png" alt="image.png"></p>
+</li>
+</ol>
+<ul>
+<li>參考網站: <a href="https://shockuccu.blogspot.com/2021/10/postman.html"  class="external-link" target="_blank" rel="noopener">https://shockuccu.blogspot.com/2021/10/postman.html</a></li>
+</ul>
+<h3 id="第二種-line-notify-應用-service">
+  第二種: LINE Notify 應用 (Service)
+  <a class="heading-link" href="#%e7%ac%ac%e4%ba%8c%e7%a8%ae-line-notify-%e6%87%89%e7%94%a8-service">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>首先登入 <a href="https://notify-bot.line.me/zh_TW/"  class="external-link" target="_blank" rel="noopener">LINE Notify</a>，並建立好服務</p>
+</li>
+<li>
+<p>建立包含服務相關資訊的 OAuth URL，讓使用者進行訪問</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="line"><span class="cl">        <span class="kd">function</span> <span class="nx">oAuth2</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">URL</span> <span class="o">=</span> <span class="s1">&#39;https://notify-bot.line.me/oauth/authorize?&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">URL</span> <span class="o">+=</span> <span class="s1">&#39;response_type=code&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">URL</span> <span class="o">+=</span> <span class="s1">&#39;&amp;client_id=[YOUR_CLIENT_ID]&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">URL</span> <span class="o">+=</span> <span class="s1">&#39;&amp;redirect_uri=[YOUR_CALLBACK_URL]&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">URL</span> <span class="o">+=</span> <span class="s1">&#39;&amp;scope=notify&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">URL</span> <span class="o">+=</span> <span class="s1">&#39;&amp;state=NO_STATE&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>使用者訪問後進行登入，並進行授權</p>
+</li>
+<li>
+<p>授權成功後則會返回 Authorize Code</p>
+</li>
+<li>
+<p>再利用 Authorize Code 取得 Token</p>
+<p><img src="/images/line-notify/image3.png" alt="image.png"></p>
+<h4 id="請求方式">
+  <strong>請求方式</strong>
+  <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e6%96%b9%e5%bc%8f">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>HTTP 方法</strong>: <code>POST</code></li>
+<li><strong>API URL</strong>: <code>https://notify-api.line.me/api/notify</code></li>
+</ul>
+<h4 id="headers">
+  <strong>Headers</strong>
+  <a class="heading-link" href="#headers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>參數名稱</th>
+          <th>必要性</th>
+          <th>說明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Content-Type</code></td>
+          <td>必須</td>
+          <td><code>application/x-www-form-urlencoded</code></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="請求參數">
+  <strong>請求參數</strong>
+  <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e5%8f%83%e6%95%b8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>以下參數放在 <strong>Request Body</strong> 中（格式為 <code>x-www-form-urlencoded</code>）。</p>
+<table>
+  <thead>
+      <tr>
+          <th>參數名稱</th>
+          <th>必要性</th>
+          <th>說明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>grant_type</code></td>
+          <td>必須</td>
+          <td>授權的類別。請指定<code>authorization_code</code></td>
+      </tr>
+      <tr>
+          <td><code>code</code></td>
+          <td>必須</td>
+          <td>對象的暫時識別碼，也就是剛剛取得的 Authorize Code</td>
+      </tr>
+      <tr>
+          <td><code>redirect_uri</code></td>
+          <td>必須</td>
+          <td>服務的 Callback URL</td>
+      </tr>
+      <tr>
+          <td><code>client_id</code></td>
+          <td>必須</td>
+          <td>服務的識別碼</td>
+      </tr>
+      <tr>
+          <td><code>client_secret</code></td>
+          <td>必須</td>
+          <td>服務的金鑰</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ol>
+<ul>
+<li><a href="https://blog.poychang.net/line-notify-1-basic/"  class="external-link" target="_blank" rel="noopener">參考網站</a></li>
+</ul>
+<h1 id="2用-token-送出請求">
+  2.用 Token 送出請求
+  <a class="heading-link" href="#2%e7%94%a8-token-%e9%80%81%e5%87%ba%e8%ab%8b%e6%b1%82">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><img src="/images/line-notify/image4.png" alt="image.png"></p>
+<ol>
+<li>
+<h4 id="請求方式-1">
+  <strong>請求方式</strong>
+  <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e6%96%b9%e5%bc%8f-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>HTTP 方法</strong>: <code>POST</code></li>
+<li><strong>API URL</strong>: <code>https://notify-api.line.me/api/notify</code></li>
+</ul>
+</li>
+<li>
+<h4 id="headers-1">
+  <strong>Headers</strong>
+  <a class="heading-link" href="#headers-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>參數名稱</th>
+          <th>必要性</th>
+          <th>說明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Authorization</code></td>
+          <td>必須</td>
+          <td>Bearer + Access Token，即 (4) 所取得的 Token</td>
+      </tr>
+      <tr>
+          <td><code>Content-Type</code></td>
+          <td>必須</td>
+          <td><code>application/x-www-form-urlencoded</code></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<h4 id="請求參數-1">
+  <strong>請求參數</strong>
+  <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e5%8f%83%e6%95%b8-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>以下參數放在 <strong>Request Body</strong> 中（格式為 <code>x-www-form-urlencoded</code>）。</p>
+<table>
+  <thead>
+      <tr>
+          <th>參數名稱</th>
+          <th>必要性</th>
+          <th>類型</th>
+          <th>說明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>message</code></td>
+          <td>必須</td>
+          <td><code>String</code></td>
+          <td>要傳送的訊息，最大 1000 字元。如果是空字串，則會報錯。</td>
+      </tr>
+      <tr>
+          <td><code>imageThumbnail</code></td>
+          <td>可選</td>
+          <td><code>String</code></td>
+          <td>圖片縮圖 URL（HTTPS），最大尺寸 240×240px，若指定了 <code>imageFullsize</code> 則必須包含此參數。</td>
+      </tr>
+      <tr>
+          <td><code>imageFullsize</code></td>
+          <td>可選</td>
+          <td><code>String</code></td>
+          <td>圖片完整 URL（HTTPS），最大尺寸 1024×1024px，檔案大小不可超過 1 MB。</td>
+      </tr>
+      <tr>
+          <td><code>imageFile</code></td>
+          <td>可選</td>
+          <td><code>File</code></td>
+          <td>上傳圖片檔案（PNG、JPEG），與 <code>imageThumbnail</code> 和 <code>imageFullsize</code> 互斥，只能使用一種。</td>
+      </tr>
+      <tr>
+          <td><code>stickerPackageId</code></td>
+          <td>可選</td>
+          <td><code>Integer</code></td>
+          <td>貼圖包 ID，需搭配 <code>stickerId</code> 使用。</td>
+      </tr>
+      <tr>
+          <td><code>stickerId</code></td>
+          <td>可選</td>
+          <td><code>Integer</code></td>
+          <td>貼圖 ID，需搭配 <code>stickerPackageId</code> 使用。</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ol>
+<h4 id="相關網站">
+  相關網站
+  <a class="heading-link" href="#%e7%9b%b8%e9%97%9c%e7%b6%b2%e7%ab%99">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><a href="https://developers.line.biz/zh-hant/services/messaging-api/"  class="external-link" target="_blank" rel="noopener">Line Messaging API</a></li>
+<li><a href="https://developers.line.biz/en/docs/messaging-api/sticker-list/#sticker-definitions"  class="external-link" target="_blank" rel="noopener">Line貼圖文件</a></li>
+<li><a href="https://notify-bot.line.me/zh_TW/"  class="external-link" target="_blank" rel="noopener">Line Notify</a></li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+        
+        
+        <div class="comments">
+  <script>
+
+    let getTheme = window.localStorage && window.localStorage.getItem("colorscheme");
+    let themeInParams = 'github-light';
+
+    if (getTheme == null) {
+      if (themeInParams !== '' && themeInParams !== 'auto') {
+        getTheme = themeInParams;
+      }
+      else {
+        getTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+      }
+    }
+
+    let theme = getTheme === 'dark' ? 'github-dark' : 'github-light';
+    let s = document.createElement('script');
+    s.src = 'https://utteranc.es/client.js';
+    s.setAttribute('repo', 'feng0530\/feng0530.github.io');
+    s.setAttribute('issue-term', 'title');
+    s.setAttribute('theme', theme);
+    s.setAttribute('crossorigin', 'anonymous');
+    s.setAttribute('async', '');
+    document.querySelector('div.comments').innerHTML = '';
+    document.querySelector('div.comments').appendChild(s);
+
+  </script>
+</div>
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2025
+     Frank Chiu 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.ad1b51a43d57149ba412419049a9b61ccce25d9ea1ce369cff7c21dd9128ba75.js" integrity="sha256-rRtRpD1XFJukEkGQSam2HMziXZ6hzjac/3wh3ZEounU="></script>
+  
+
+  
+  
+  
+  <script src="/js/algolia.min.c500d4702823855b453c1d9625155bd918afbb3006d1173cbeaa91471b60775d.js" integrity="sha256-xQDUcCgjhVtFPB2WJRVb2RivuzAG0Rc8vqqRRxtgd10="></script>
+  
+  
+  
+  
+  <script src="/js/algoliasearch-lite.umd.min.f10ac93dcd77e656b79d18e741b90145488aad107b73e98547f92fb609e31036.js" integrity="sha256-8QrJPc135la3nRjnQbkBRUiKrRB7c&#43;mFR/kvtgnjEDY="></script>
+  
+  
+  
+  
+  <script src="/js/instantsearch.production.min.min.92c275fd26dcd04419b53c6aad7cae15dc07d8052d310e93f7eb4cb0e5a76bfe.js" integrity="sha256-ksJ1/Sbc0EQZtTxqrXyuFdwH2AUtMQ6T9&#43;tMsOWna/4="></script>
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+    
+  <div id="searchModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModalBtn" class="close-btn">&times;</span>
+      <h2>搜尋網站</h2>
+      
+      <div id="searchbox"></div>
+      
+      <div id="hits"></div>
+      
+      <div id="pagination"></div>
+    </div>
+  </div>
+</body>
+</html>
