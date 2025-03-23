@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Frank Chiu">
-<meta name="description" content="Spring Boot 串接 Line Notify的實作練習">
+<meta name="description" content="Spring Boot 串接 Line Notify的實作練習筆記">
 <meta name="keywords" content="Frank Chiu,java,website">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Spring Boot 串接 Line Notify">
-  <meta name="twitter:description" content="Spring Boot 串接 Line Notify的實作練習">
+  <meta name="twitter:description" content="Spring Boot 串接 Line Notify的實作練習筆記">
 
 <meta property="og:url" content="https://feng0530.github.io/posts/line-notify/">
   <meta property="og:site_name" content="Frank&#39;s Website">
   <meta property="og:title" content="Spring Boot 串接 Line Notify">
-  <meta property="og:description" content="Spring Boot 串接 Line Notify的實作練習">
+  <meta property="og:description" content="Spring Boot 串接 Line Notify的實作練習筆記">
   <meta property="og:locale" content="zh_tw">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -48,7 +48,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/coder.min.172f16f46a56460165420470fe3c288abc6c6f087d8f506a63b0faa14f157e20.css" integrity="sha256-Fy8W9GpWRgFlQgRw/jwoirxsbwh9j1BqY7D6oU8VfiA=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="/css/coder.min.6a9efa64517647a59d303f63d544a4d63d7e6b70303739deccf5123dc62d0cd4.css" integrity="sha256-ap76ZFF2R6WdMD9j1USk1j1&#43;a3AwNznezPUSPcYtDNQ=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -131,29 +131,26 @@
             
           
             
-              <li class="navigation-item has-dropdown">
-                <a id="posts" class="navigation-link " href="javascript:void(0)">文章</a>
-                <ul class="dropdown">
-                  
-                    <li>
-                      <a class="dropdown-link" href="/posts/">文章列表</a>
-                    </li>
-                  
-                    <li>
-                      <a class="dropdown-link" href="/categories/">文章分類</a>
-                    </li>
-                  
-                    <li>
-                      <a class="dropdown-link" href="/tags/">文章標籤</a>
-                    </li>
-                  
-                </ul>
+              <li class="navigation-item">
+                <a class="navigation-link " href="/posts/">文章</a>
               </li>
             
           
             
               <li class="navigation-item">
                 <a class="navigation-link " href="/projects/">專案</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/tags/">標籤</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/categories/">類別</a>
               </li>
             
           
@@ -194,7 +191,7 @@
           
           <div class="categories">
   <i class="fa-solid fa-folder" aria-hidden="true"></i>
-    <a href="/categories/%E8%87%AA%E6%88%91%E5%AD%B8%E7%BF%92/">自我學習</a></div>
+    <a href="/categories/%E5%AF%A6%E4%BD%9C%E7%B7%B4%E7%BF%92/">實作練習</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -223,9 +220,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
-<h3 id="第一種-個人存取權杖-personal-access-token">
-  第一種: 個人存取權杖 (Personal Access Token)
-  <a class="heading-link" href="#%e7%ac%ac%e4%b8%80%e7%a8%ae-%e5%80%8b%e4%ba%ba%e5%ad%98%e5%8f%96%e6%ac%8a%e6%9d%96-personal-access-token">
+<h3 id="1-1-個人存取權杖-personal-access-token">
+  1-1 個人存取權杖 (Personal Access Token)
+  <a class="heading-link" href="#1-1-%e5%80%8b%e4%ba%ba%e5%ad%98%e5%8f%96%e6%ac%8a%e6%9d%96-personal-access-token">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -236,11 +233,11 @@
 </li>
 <li>
 <p>選擇發行權杖</p>
-<p><img src="/images/line-notify/image.png" alt="image.png"></p>
+<p><img src="/images/post/line-notify/image.png" alt="image.png"></p>
 </li>
 <li>
 <p>選擇一對一聊天室 or 群組</p>
-<p><img src="/images/line-notify/image1.png" alt="image.png"></p>
+<p><img src="/images/post/line-notify/image1.png" alt="image.png"></p>
 <ul>
 <li>
 <p>沒有發行按鈕可以點選，使用以下語法來觸發按鈕</p>
@@ -260,15 +257,16 @@
 </li>
 <li>
 <p>獲得權杖</p>
-<p><img src="/images/line-notify/image2.png" alt="image.png"></p>
+<p><img src="/images/post/line-notify/image2.png" alt="image.png"></p>
 </li>
 </ol>
 <ul>
 <li>參考網站: <a href="https://shockuccu.blogspot.com/2021/10/postman.html"  class="external-link" target="_blank" rel="noopener">https://shockuccu.blogspot.com/2021/10/postman.html</a></li>
 </ul>
-<h3 id="第二種-line-notify-應用-service">
-  第二種: LINE Notify 應用 (Service)
-  <a class="heading-link" href="#%e7%ac%ac%e4%ba%8c%e7%a8%ae-line-notify-%e6%87%89%e7%94%a8-service">
+<hr>
+<h3 id="1-2-line-notify-應用-service">
+  1-2 LINE Notify 應用 (Service)
+  <a class="heading-link" href="#1-2-line-notify-%e6%87%89%e7%94%a8-service">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -297,9 +295,9 @@
 </li>
 <li>
 <p>再利用 Authorize Code 取得 Token</p>
-<p><img src="/images/line-notify/image3.png" alt="image.png"></p>
+<p><img src="/images/post/line-notify/image3.png" alt="image.png"></p>
 <h4 id="請求方式">
-  <strong>請求方式</strong>
+  請求方式
   <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e6%96%b9%e5%bc%8f">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
@@ -310,7 +308,7 @@
 <li><strong>API URL</strong>: <code>https://notify-api.line.me/api/notify</code></li>
 </ul>
 <h4 id="headers">
-  <strong>Headers</strong>
+  Headers
   <a class="heading-link" href="#headers">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
@@ -333,7 +331,7 @@
   </tbody>
 </table>
 <h4 id="請求參數">
-  <strong>請求參數</strong>
+  請求參數
   <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e5%8f%83%e6%95%b8">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
@@ -381,6 +379,7 @@
 <ul>
 <li><a href="https://blog.poychang.net/line-notify-1-basic/"  class="external-link" target="_blank" rel="noopener">參考網站</a></li>
 </ul>
+<hr>
 <h1 id="2用-token-送出請求">
   2.用 Token 送出請求
   <a class="heading-link" href="#2%e7%94%a8-token-%e9%80%81%e5%87%ba%e8%ab%8b%e6%b1%82">
@@ -388,11 +387,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
-<p><img src="/images/line-notify/image4.png" alt="image.png"></p>
-<ol>
-<li>
+<p><img src="/images/post/line-notify/image4.png" alt="image.png"></p>
 <h4 id="請求方式-1">
-  <strong>請求方式</strong>
+  請求方式
   <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e6%96%b9%e5%bc%8f-1">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
@@ -402,10 +399,8 @@
 <li><strong>HTTP 方法</strong>: <code>POST</code></li>
 <li><strong>API URL</strong>: <code>https://notify-api.line.me/api/notify</code></li>
 </ul>
-</li>
-<li>
 <h4 id="headers-1">
-  <strong>Headers</strong>
+  Headers
   <a class="heading-link" href="#headers-1">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
@@ -432,10 +427,8 @@
       </tr>
   </tbody>
 </table>
-</li>
-<li>
 <h4 id="請求參數-1">
-  <strong>請求參數</strong>
+  請求參數
   <a class="heading-link" href="#%e8%ab%8b%e6%b1%82%e5%8f%83%e6%95%b8-1">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
@@ -490,8 +483,6 @@
       </tr>
   </tbody>
 </table>
-</li>
-</ol>
 <h4 id="相關網站">
   相關網站
   <a class="heading-link" href="#%e7%9b%b8%e9%97%9c%e7%b6%b2%e7%ab%99">

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <link rel="stylesheet" href="https://kucw.io/plugins/themify-icons/themify-icons.css ">
+<hWead>
+  <title>
+  Docker 基礎內容筆記
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Frank Chiu">
+<meta name="description" content="Docker的基礎核心內容，Image、Container的介紹">
+<meta name="keywords" content="Frank Chiu,java,website">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker 基礎內容筆記">
+  <meta name="twitter:description" content="Docker的基礎核心內容，Image、Container的介紹">
+
+<meta property="og:url" content="https://feng0530.github.io/posts/docker-beginner/">
+  <meta property="og:site_name" content="Frank&#39;s Website">
+  <meta property="og:title" content="Docker 基礎內容筆記">
+  <meta property="og:description" content="Docker的基礎核心內容，Image、Container的介紹">
+  <meta property="og:locale" content="zh_tw">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-03-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-22T00:00:00+00:00">
+    <meta property="article:tag" content="Docker">
+
+
+
+
+<link rel="canonical" href="https://feng0530.github.io/posts/docker-beginner/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.6a9efa64517647a59d303f63d544a4d63d7e6b70303739deccf5123dc62d0cd4.css" integrity="sha256-ap76ZFF2R6WdMD9j1USk1j1&#43;a3AwNznezPUSPcYtDNQ=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.5da730f27b77109b00a3b11bbb3f0ec63768469872ec2e9e7c692c1378eb0572.css" integrity="sha256-Xacw8nt3EJsAo7Ebuz8OxjdoRphy7C6efGksE3jrBXI=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5LN30FZCD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M5LN30FZCD');
+</script>
+
+</hWead>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a style="letter-spacing: 0.1rem; font-size: 3rem;" href="https://feng0530.github.io/">
+      Frank&#39;s Website
+    </a>
+    
+
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/about/">關於我</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/posts/">文章</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/projects/">專案</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/tags/">標籤</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/categories/">類別</a>
+              </li>
+            
+          
+        
+
+        <li class="navigation-item">
+          <button id="openModalBtn" class="algolia-search-btn navigation-link">搜尋網站 <i class="ti-search"></i></button>
+        </li>
+      </ul>
+    
+  </section>
+</nav>
+
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://feng0530.github.io/posts/docker-beginner/">
+              Docker 基礎內容筆記
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-03-22T00:00:00Z">
+                2024-03-22
+              </time>
+            </span>
+            
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/docker/">Docker</a>
+    </span></div>
+
+        </div>
+      </header>
+      <hr>
+
+      <div class="post-content">
+        
+        <h1 id="1-docker-簡介">
+  1. Docker 簡介
+  <a class="heading-link" href="#1-docker-%e7%b0%a1%e4%bb%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Docker 是一個開源的容器化平台，使開發者能夠將應用程式及其依賴項封裝到容器中，以實現跨平台運行與環境一致性。</p>
+<h4 id="11-docker-特點">
+  1.1 Docker 特點
+  <a class="heading-link" href="#11-docker-%e7%89%b9%e9%bb%9e">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特點</strong></th>
+          <th><strong>說明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>輕量級</strong></td>
+          <td>容器比 VM 更小、更快、更省資源</td>
+      </tr>
+      <tr>
+          <td><strong>可移植性</strong></td>
+          <td>一次開發，隨處運行</td>
+      </tr>
+      <tr>
+          <td><strong>快速部署</strong></td>
+          <td>幾秒鐘內啟動應用程式</td>
+      </tr>
+      <tr>
+          <td><strong>一致性與隔離性</strong></td>
+          <td>各個容器互不干擾</td>
+      </tr>
+      <tr>
+          <td><strong>版本控制與回滾</strong></td>
+          <td>更新、回滾都很簡單</td>
+      </tr>
+      <tr>
+          <td><strong>容器編排</strong></td>
+          <td>可用 Docker Swarm / Kubernetes 管理多個容器</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="12-虛擬主機-vs-容器">
+  1.2 虛擬主機 vs 容器
+  <a class="heading-link" href="#12-%e8%99%9b%e6%93%ac%e4%b8%bb%e6%a9%9f-vs-%e5%ae%b9%e5%99%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><img src="/images/post/docker-beginner/Untitled.png" alt="Untitled"></p>
+<ul>
+<li>Host OS：實體電腦的 OS</li>
+<li>Guest OS：基於 Host OS 啟動的 VM，其中的 OS 稱為 Guest OS</li>
+<li>Hypervisor：虛擬機器監視器，Host OS中負責管理 VM 的應用，或稱為Virtual Machine Monitor (VMM)</li>
+</ul>
+<hr>
+<h1 id="2-docker-核心概念">
+  2. Docker 核心概念
+  <a class="heading-link" href="#2-docker-%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h4 id="21-映像檔image">
+  2.1 映像檔（Image）
+  <a class="heading-link" href="#21-%e6%98%a0%e5%83%8f%e6%aa%94image">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>唯讀模式，用來建立容器的模板。</li>
+<li>包含應用程式、依賴、設定等。</li>
+<li>可使用 Docker File建構而成。</li>
+<li>可從 Docker Hub 或私有倉庫下載。</li>
+</ul>
+<h4 id="22-容器container">
+  2.2 容器（Container）
+  <a class="heading-link" href="#22-%e5%ae%b9%e5%99%a8container">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>讀寫模式，基於映像檔執行的實例。</li>
+<li>內部運行應用程式並維持獨立環境。</li>
+<li>支援跨環境執行，確保一致性。</li>
+</ul>
+<h4 id="23-倉庫與註冊伺服器repository--registry">
+  2.3 倉庫與註冊伺服器（Repository &amp; Registry）
+  <a class="heading-link" href="#23-%e5%80%89%e5%ba%ab%e8%88%87%e8%a8%bb%e5%86%8a%e4%bc%ba%e6%9c%8d%e5%99%a8repository--registry">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Repository</strong>：存放映像檔的地方。</li>
+<li><strong>Registry</strong>：管理多個 Repository，可分為公開（Docker Hub）與私有。</li>
+</ul>
+<hr>
+<h1 id="3-常用指令">
+  3. 常用指令
+  <a class="heading-link" href="#3-%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>常見基本指令與核心元間的關係
+<img src="/images/post/docker-beginner/image.png" alt="docker commend"></li>
+</ul>
+<h4 id="31-映像檔管理">
+  3.1 映像檔管理
+  <a class="heading-link" href="#31-%e6%98%a0%e5%83%8f%e6%aa%94%e7%ae%a1%e7%90%86">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker pull image_name   <span class="c1"># 下載映像檔</span>
+</span></span><span class="line"><span class="cl">docker images            <span class="c1"># 列出本機映像檔</span>
+</span></span><span class="line"><span class="cl">docker rmi image_id      <span class="c1"># 刪除映像檔</span>
+</span></span></code></pre></div><p><a href="https://docs.docker.com/reference/cli/docker/image/"  class="external-link" target="_blank" rel="noopener">映像檔指令參考文件</a></p>
+<h4 id="32-容器管理">
+  3.2 容器管理
+  <a class="heading-link" href="#32-%e5%ae%b9%e5%99%a8%e7%ae%a1%e7%90%86">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -d --name my_container -p 8080:80 nginx  <span class="c1"># 執行容器</span>
+</span></span><span class="line"><span class="cl">docker ps                                           <span class="c1"># 列出運行中容器</span>
+</span></span><span class="line"><span class="cl">docker ps -a                                        <span class="c1"># 列出所有容器</span>
+</span></span><span class="line"><span class="cl">docker stop container_id                            <span class="c1"># 停止容器</span>
+</span></span><span class="line"><span class="cl">docker start container_id                           <span class="c1"># 啟動容器</span>
+</span></span><span class="line"><span class="cl">docker rm container_id                              <span class="c1"># 刪除容器</span>
+</span></span></code></pre></div><p><a href="https://docs.docker.com/reference/cli/docker/container/"  class="external-link" target="_blank" rel="noopener">容器指令參考文件</a></p>
+<h4 id="33-備份相關指令">
+  3.3 備份相關指令
+  <a class="heading-link" href="#33-%e5%82%99%e4%bb%bd%e7%9b%b8%e9%97%9c%e6%8c%87%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th><code>docker save/load</code></th>
+          <th><code>docker export/import</code></th>
+          <th><code>docker commit</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>用途</strong></td>
+          <td>備份或分享 Image</td>
+          <td>備份容器文件系統</td>
+          <td>保存容器為新的 Image</td>
+      </tr>
+      <tr>
+          <td><strong>操作對象</strong></td>
+          <td><strong>Image</strong></td>
+          <td><strong>Container</strong></td>
+          <td><strong>Container</strong></td>
+      </tr>
+      <tr>
+          <td><strong>是否包含歷史層（Layers）</strong></td>
+          <td>✅ 是</td>
+          <td>❌ 否</td>
+          <td>✅ 是</td>
+      </tr>
+      <tr>
+          <td><strong>是否包含 Volume</strong></td>
+          <td>❌ 否</td>
+          <td>❌ 否</td>
+          <td>❌ 否</td>
+      </tr>
+      <tr>
+          <td><strong>結果類型</strong></td>
+          <td><code>.tar</code> 檔案（完整映像）</td>
+          <td><code>.tar</code> 檔案（文件系統快照）</td>
+          <td>新的 Image</td>
+      </tr>
+      <tr>
+          <td><strong>是否適用於備份映像</strong></td>
+          <td>✅ 是</td>
+          <td>❌ 否</td>
+          <td>✅ 是</td>
+      </tr>
+      <tr>
+          <td><strong>是否適用於備份容器狀態</strong></td>
+          <td>❌ 否</td>
+          <td>✅ 是</td>
+          <td>✅ 是</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="相關網站">
+  相關網站
+  <a class="heading-link" href="#%e7%9b%b8%e9%97%9c%e7%b6%b2%e7%ab%99">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><a href="/posts/docker-advanced" >Docker 進階內容筆記</a></li>
+<li><a href="https://docs.docker.com/reference/cli/docker/"  class="external-link" target="_blank" rel="noopener">官方指令文件</a></li>
+<li><a href="https://hub.docker.com/"  class="external-link" target="_blank" rel="noopener">官方公共倉庫</a></li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+        
+        
+        <div class="comments">
+  <script>
+
+    let getTheme = window.localStorage && window.localStorage.getItem("colorscheme");
+    let themeInParams = 'github-light';
+
+    if (getTheme == null) {
+      if (themeInParams !== '' && themeInParams !== 'auto') {
+        getTheme = themeInParams;
+      }
+      else {
+        getTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+      }
+    }
+
+    let theme = getTheme === 'dark' ? 'github-dark' : 'github-light';
+    let s = document.createElement('script');
+    s.src = 'https://utteranc.es/client.js';
+    s.setAttribute('repo', 'feng0530\/feng0530.github.io');
+    s.setAttribute('issue-term', 'title');
+    s.setAttribute('theme', theme);
+    s.setAttribute('crossorigin', 'anonymous');
+    s.setAttribute('async', '');
+    document.querySelector('div.comments').innerHTML = '';
+    document.querySelector('div.comments').appendChild(s);
+
+  </script>
+</div>
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2025
+     Frank Chiu 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.ad1b51a43d57149ba412419049a9b61ccce25d9ea1ce369cff7c21dd9128ba75.js" integrity="sha256-rRtRpD1XFJukEkGQSam2HMziXZ6hzjac/3wh3ZEounU="></script>
+  
+
+  
+  
+  
+  <script src="/js/algolia.min.c06e556f612819ef8651ee4a833ad039c1c6a8f6b47826967ed530b949f7e60d.js"></script>
+  
+  
+
+  
+  
+  
+  <script src="/algoliasearch-lite.umd_3149762917949304374.min.f10ac93dcd77e656b79d18e741b90145488aad107b73e98547f92fb609e31036.js" integrity="sha256-8QrJPc135la3nRjnQbkBRUiKrRB7c&#43;mFR/kvtgnjEDY="></script>
+  
+  
+  
+  
+  <script src="/instantsearch.production.min_18353847574760746105.min.92c275fd26dcd04419b53c6aad7cae15dc07d8052d310e93f7eb4cb0e5a76bfe.js" integrity="sha256-ksJ1/Sbc0EQZtTxqrXyuFdwH2AUtMQ6T9&#43;tMsOWna/4="></script>
+  
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+    
+  <div id="searchModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModalBtn" class="close-btn">&times;</span>
+      <h2>搜尋網站</h2>
+      
+      <div id="searchbox"></div>
+      
+      <div id="hits"></div>
+      
+      <div id="pagination"></div>
+    </div>
+  </div>
+</body>
+</html>

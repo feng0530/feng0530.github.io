@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <link rel="stylesheet" href="https://kucw.io/plugins/themify-icons/themify-icons.css ">
+<hWead>
+  <title>
+  Docker 進階內容筆記
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Frank Chiu">
+<meta name="description" content="Docker的進階內容，包含 Docker File、Docker Compose的介紹">
+<meta name="keywords" content="Frank Chiu,java,website">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker 進階內容筆記">
+  <meta name="twitter:description" content="Docker的進階內容，包含 Docker File、Docker Compose的介紹">
+
+<meta property="og:url" content="https://feng0530.github.io/posts/docker-advanced/">
+  <meta property="og:site_name" content="Frank&#39;s Website">
+  <meta property="og:title" content="Docker 進階內容筆記">
+  <meta property="og:description" content="Docker的進階內容，包含 Docker File、Docker Compose的介紹">
+  <meta property="og:locale" content="zh_tw">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-03-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-23T00:00:00+00:00">
+    <meta property="article:tag" content="Docker">
+
+
+
+
+<link rel="canonical" href="https://feng0530.github.io/posts/docker-advanced/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.6a9efa64517647a59d303f63d544a4d63d7e6b70303739deccf5123dc62d0cd4.css" integrity="sha256-ap76ZFF2R6WdMD9j1USk1j1&#43;a3AwNznezPUSPcYtDNQ=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.5da730f27b77109b00a3b11bbb3f0ec63768469872ec2e9e7c692c1378eb0572.css" integrity="sha256-Xacw8nt3EJsAo7Ebuz8OxjdoRphy7C6efGksE3jrBXI=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5LN30FZCD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M5LN30FZCD');
+</script>
+
+</hWead>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a style="letter-spacing: 0.1rem; font-size: 3rem;" href="https://feng0530.github.io/">
+      Frank&#39;s Website
+    </a>
+    
+
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/about/">關於我</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/posts/">文章</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/projects/">專案</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/tags/">標籤</a>
+              </li>
+            
+          
+            
+              <li class="navigation-item">
+                <a class="navigation-link " href="/categories/">類別</a>
+              </li>
+            
+          
+        
+
+        <li class="navigation-item">
+          <button id="openModalBtn" class="algolia-search-btn navigation-link">搜尋網站 <i class="ti-search"></i></button>
+        </li>
+      </ul>
+    
+  </section>
+</nav>
+
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://feng0530.github.io/posts/docker-advanced/">
+              Docker 進階內容筆記
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-03-23T00:00:00Z">
+                2024-03-23
+              </time>
+            </span>
+            
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/docker/">Docker</a>
+    </span></div>
+
+        </div>
+      </header>
+      <hr>
+
+      <div class="post-content">
+        
+        <h1 id="1-docker-volume-資料持久化">
+  1. Docker Volume (資料持久化)
+  <a class="heading-link" href="#1-docker-volume-%e8%b3%87%e6%96%99%e6%8c%81%e4%b9%85%e5%8c%96">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><a href="https://docs.docker.com/engine/storage/"  class="external-link" target="_blank" rel="noopener">Docker Volume參考文件</a></p>
+<h4 id="11-volume簡介">
+  1.1 Volume簡介
+  <a class="heading-link" href="#11-volume%e7%b0%a1%e4%bb%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>持久化資料</strong>：即使容器刪除，資料仍然保留。</li>
+<li><strong>跨容器共享</strong>：多個容器可共用相同的 Volume。</li>
+<li><strong>效能最佳化</strong>：比直接寫入容器快。</li>
+<li><strong>資料的備份與遷移</strong>：使得資料管理更加靈活。</li>
+</ul>
+<h4 id="12-volume常用指令">
+  1.2 Volume常用指令
+  <a class="heading-link" href="#12-volume%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker volume create my_volume <span class="c1"># 建立 Volume</span>
+</span></span><span class="line"><span class="cl">docker volume ls               <span class="c1"># 列出所有 Volume</span>
+</span></span><span class="line"><span class="cl">docker volume rm my_volume     <span class="c1"># 刪除 Volume</span>
+</span></span><span class="line"><span class="cl">docker run --mount <span class="nv">type</span><span class="o">=</span>volume,src<span class="o">=</span>my_volume,dst<span class="o">={</span>mount-path<span class="o">}</span>     <span class="c1"># 掛載指定的 Volume到容器上</span>
+</span></span><span class="line"><span class="cl">docker run --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">={</span>host-path<span class="o">}</span>,dst<span class="o">={</span>container-path<span class="o">}</span> <span class="c1"># 掛載主機目錄到容器上</span>
+</span></span></code></pre></div><p><a href="https://docs.docker.com/reference/cli/docker/volume/"  class="external-link" target="_blank" rel="noopener">Volume指令參考文件</a></p>
+<hr>
+<h1 id="2-docker-network">
+  2. Docker Network
+  <a class="heading-link" href="#2-docker-network">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><a href="https://docs.docker.com/reference/cli/docker/network/"  class="external-link" target="_blank" rel="noopener">Docker Network官方參考文件</a></p>
+<h4 id="21-docker-網路模式">
+  2.1 Docker 網路模式
+  <a class="heading-link" href="#21-docker-%e7%b6%b2%e8%b7%af%e6%a8%a1%e5%bc%8f">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Bridge</strong>：預設網路模式，容器間僅能通過 IP 進行通訊。</li>
+<li><strong>Host</strong>：容器與主機共享網路。</li>
+<li><strong>None</strong>：完全隔離網路。</li>
+</ul>
+<h4 id="23-自定義網路">
+  2.3 自定義網路
+  <a class="heading-link" href="#23-%e8%87%aa%e5%ae%9a%e7%be%a9%e7%b6%b2%e8%b7%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>連接到同一個自定義網路的容器，彼此之間可以通過<strong>容器名</strong>進行通訊</li>
+<li>提供了更好的隔離性，避免無關聯的容器間進行通訊</li>
+</ul>
+<h4 id="23-network常用指令">
+  2.3 Network常用指令
+  <a class="heading-link" href="#23-network%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker network create my_network               <span class="c1"># 建立自訂 Network</span>
+</span></span><span class="line"><span class="cl">docker network ls                              <span class="c1"># 列出所有 Network</span>
+</span></span><span class="line"><span class="cl">docker network connect my_network my_container <span class="c1"># 將容器連接到 Network</span>
+</span></span></code></pre></div><hr>
+<h1 id="3-dockerfile-自動化建置映像檔">
+  3. Dockerfile (自動化建置映像檔)
+  <a class="heading-link" href="#3-dockerfile-%e8%87%aa%e5%8b%95%e5%8c%96%e5%bb%ba%e7%bd%ae%e6%98%a0%e5%83%8f%e6%aa%94">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><a href="https://docs.docker.com/reference/dockerfile/"  class="external-link" target="_blank" rel="noopener">Docker File官方參考文件</a></p>
+<h4 id="31-dockerfile簡介">
+  3.1 Dockerfile簡介
+  <a class="heading-link" href="#31-dockerfile%e7%b0%a1%e4%bb%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>定義映像檔內容： 可以定義其中要包含的所有元素，包括基礎映像、應用程序代碼、環境設置等。</li>
+<li>自動化建構過程： 通過 Dockerfile，您可以自動化整個映像建構過程，無需手動執行每個步驟。</li>
+<li>版本控制： 由於 Dockerfile 是一個文本文件，它可以被版本控制，使得文件的修改可以被追踪。</li>
+<li>標準化： Dockerfile 提供了一種標準化的方式來定義和共享應用程序的運行環境。</li>
+<li>沒有副檔名，且檔名為 <strong>Dockerfile</strong></li>
+</ol>
+<h4 id="32-dockerfile範例">
+  3.2 Dockerfile範例
+  <a class="heading-link" href="#32-dockerfile%e7%af%84%e4%be%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># 設定基礎映像檔</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> ubuntu:latest</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 設定基礎映像檔</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get update<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 複製檔案</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . /app<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 設定工作目錄</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 指定預設容器啟動時執行的指令</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;python&#34;</span><span class="p">,</span> <span class="s2">&#34;app.py&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><h4 id="33-run-vs-cmd-vs-entrypoint">
+  3.3 RUN vs CMD vs ENTRYPOINT
+  <a class="heading-link" href="#33-run-vs-cmd-vs-entrypoint">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><code>RUN</code></p>
+<ul>
+<li>在建構鏡像（docker build）時執行，結果會寫入映象檔的 Layer。</li>
+</ul>
+</li>
+<li>
+<p><code>CMD</code></p>
+<ul>
+<li>設定容器啟動時執行的預設指令，可被 docker run 覆蓋。</li>
+<li>如果列出多個，則只有最後一個有效。</li>
+</ul>
+</li>
+<li>
+<p><code>ENTRYPOINT</code></p>
+<ul>
+<li>使用<strong>Exec型式</strong>撰寫。</li>
+<li>如果列出多個，則只有最後一個有效。</li>
+<li>須注意以下範例:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-docker" data-lang="docker"><span class="line"><span class="cl"><span class="c"># docker run : 會執行 &#34;ping google.com&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 命令列參數會附加在最後</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># docker run cat xxx.csv : 會報錯，因為執行的是 &#34;ping google.com cat xxx.csv&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;ping&#34;</span><span class="p">,</span> <span class="s2">&#34;google.com&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-docker" data-lang="docker"><span class="line"><span class="cl"><span class="c"># ENTRYPOINT + CMD : CMD的值等於預設參數，需要都是 Exec型式</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># docker run : 會執行 &#34;ping google.com&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># docker run test.com: 會替換掉CMD的值，即執行 &#34;ping test.com&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;ping&#34;</span><span class="p">]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;google.com&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div></li>
+</ol>
+<hr>
+<h1 id="4-docker-compose">
+  4. Docker Compose
+  <a class="heading-link" href="#4-docker-compose">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h4 id="41-docker-compose簡介">
+  4.1 Docker Compose簡介
+  <a class="heading-link" href="#41-docker-compose%e7%b0%a1%e4%bb%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>簡化配置與管理: 可以使用 <code>docker-compose.yml</code> 定義和管理多容器應用程式。</li>
+<li>開發效率提升: 支持環境變量和配置文件，方便在不同環境間切換。</li>
+<li>版本控制: 透過單一指令啟動完整環境。</li>
+</ul>
+<h4 id="42-compose-file範例">
+  4.2 Compose file範例
+  <a class="heading-link" href="#42-compose-file%e7%af%84%e4%be%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><a href="https://docs.docker.com/reference/compose-file/"  class="external-link" target="_blank" rel="noopener">Compose file官方參考文件</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">web</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;80:80&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:5.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">db_data:/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">db_data</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div><h4 id="43-docker-compose常用指令">
+  4.3 Docker Compose常用指令
+  <a class="heading-link" href="#43-docker-compose%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker-compose up       <span class="c1"># 啟動所有服務</span>
+</span></span><span class="line"><span class="cl">docker-compose down     <span class="c1"># 停止並移除所有服務</span>
+</span></span><span class="line"><span class="cl">docker-compose logs     <span class="c1"># 查看日誌</span>
+</span></span><span class="line"><span class="cl">docker-compose ps       <span class="c1"># 檢查目前運行的容器</span>
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+        
+        
+        <div class="comments">
+  <script>
+
+    let getTheme = window.localStorage && window.localStorage.getItem("colorscheme");
+    let themeInParams = 'github-light';
+
+    if (getTheme == null) {
+      if (themeInParams !== '' && themeInParams !== 'auto') {
+        getTheme = themeInParams;
+      }
+      else {
+        getTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+      }
+    }
+
+    let theme = getTheme === 'dark' ? 'github-dark' : 'github-light';
+    let s = document.createElement('script');
+    s.src = 'https://utteranc.es/client.js';
+    s.setAttribute('repo', 'feng0530\/feng0530.github.io');
+    s.setAttribute('issue-term', 'title');
+    s.setAttribute('theme', theme);
+    s.setAttribute('crossorigin', 'anonymous');
+    s.setAttribute('async', '');
+    document.querySelector('div.comments').innerHTML = '';
+    document.querySelector('div.comments').appendChild(s);
+
+  </script>
+</div>
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2025
+     Frank Chiu 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.ad1b51a43d57149ba412419049a9b61ccce25d9ea1ce369cff7c21dd9128ba75.js" integrity="sha256-rRtRpD1XFJukEkGQSam2HMziXZ6hzjac/3wh3ZEounU="></script>
+  
+
+  
+  
+  
+  <script src="/js/algolia.min.c06e556f612819ef8651ee4a833ad039c1c6a8f6b47826967ed530b949f7e60d.js"></script>
+  
+  
+
+  
+  
+  
+  <script src="/algoliasearch-lite.umd_3149762917949304374.min.f10ac93dcd77e656b79d18e741b90145488aad107b73e98547f92fb609e31036.js" integrity="sha256-8QrJPc135la3nRjnQbkBRUiKrRB7c&#43;mFR/kvtgnjEDY="></script>
+  
+  
+  
+  
+  <script src="/instantsearch.production.min_18353847574760746105.min.92c275fd26dcd04419b53c6aad7cae15dc07d8052d310e93f7eb4cb0e5a76bfe.js" integrity="sha256-ksJ1/Sbc0EQZtTxqrXyuFdwH2AUtMQ6T9&#43;tMsOWna/4="></script>
+  
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+    
+  <div id="searchModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModalBtn" class="close-btn">&times;</span>
+      <h2>搜尋網站</h2>
+      
+      <div id="searchbox"></div>
+      
+      <div id="hits"></div>
+      
+      <div id="pagination"></div>
+    </div>
+  </div>
+</body>
+</html>
